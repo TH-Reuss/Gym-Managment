@@ -1,0 +1,6 @@
+Revisar
+1.- Si cualquier administrador puede modificar un usuario aunque no pertenezca a algunos de sus gimnasios
+
+
+Mejoras
+1.- Al crear un entrenador o miembro que ya existe como usuario autocompletar la información

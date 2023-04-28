@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content%}
+{% load static %}
+
+<script type="text/javascript" src="{% static 'js/checkRut.js'%}"></script>
+
+<div class="row">
+    <div class="col-4">
+        <div class="row">
+            <h1 class="display-3 px-1">Registrar</h1>
+            <h1 class="display- px-2">Socio</h1>
+        </div>
+        <div class="row">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{% url 'manage_gym' gym.id %}">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'members' gym.id %}">Socios</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Registrar</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12 w-75">
+                {% if error == False %}
+                <div class="alert alert-success" role="alert">
+                    {{message}}
+                </div>
+                {% elif error == True %}
+                <div class="alert alert-danger" role="alert">
+                    {{message}}
+                </div>
+                {% else %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <form class="row g-3 mt-2" method="post">
+            {% csrf_token %}
+            <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Rut</label>
+                <input type="text" class="form-control" name="rut" oninput="checkRut(this)" maxlength="10"
+                    id="validationDefault01" value="" required>
+            </div>
+            <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="first_name" id="validationDefault01" value="" required>
+            </div>
+            <div class="col-md-4">
+                <label for="validationDefault02" class="form-label">Apellido</label>
+                <input type="text" class="form-control" name="last_name" id="validationDefault02" value="" required>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="form-label">Género</label>
+                <select class="form-select" name="gender" aria-label="Default select example">
+                    <option value="1">Masculino</option>
+                    <option value="2">Femenino</option>
+                    <option value="3">Otro</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="form-label">Fecha Nacimiento</label>
+                <input class="w-100 rounded form-control" name="birthday"
+                    style="border: 1px solid #ced4da; padding: 0.45rem 0.75rem;" type="date" value="2017-06-01"
+                    required />
+            </div>
+            <div class="col-md-8">
+                <label for="validationDefaultUsername" class="form-label">Correo Electronico</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="usuario" name="user" aria-label="usuario"
+                        required>
+                    <span class="input-group-text">@</span>
+                    <input type="text" class="form-control" placeholder="dominio" name="domain" aria-label="domain"
+                        required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Gimnasio</label>
+                <input type="text" class="form-control" name="gym_name" oninput="checkRut(this)" maxlength="10"
+                    id="validationDefault01" value="{{gym.name}}" readonly required>
+            </div>
+            <div class="col-4 d-flex align-items-end justify-content-start">
+                <button class="btn btn-primary w-100" type="submit">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
